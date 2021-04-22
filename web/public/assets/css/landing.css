@@ -1,0 +1,138 @@
+/* landing page */
+
+:focus {
+    outline: none !important;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: #161515;
+}
+
+::-webkit-scrollbar-thumb {
+    height: 30px;
+    background-color: #828286;
+}
+
+.content-wrapper,
+.main-footer {
+    margin: 0px !important;
+}
+
+.header {
+    width: 100%;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    background-color: #eada23;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.header>.logo {
+    flex-grow: 1;
+}
+
+.header>.logo>p {
+    font-size: 16px;
+    color: #000;
+    font-weight: bold;
+    margin: 0px !important;
+}
+
+.header>.btn {
+    border-width: 0px !important;
+    background-color: transparent !important;
+}
+
+.header>.btn>img {
+    width: 27px;
+    height: 26px;
+    border-width: 1px;
+    border-radius: 8px;
+    border-color: #3e3c3c;
+    border-style: solid;
+    padding: 2px;
+}
+
+.header>.btn>span {
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 4px;
+    color: #333;
+}
+
+.landing>.wrapper {
+    background-color: #000;
+    overflow: hidden !important;
+}
+
+.landing-body {
+    width: 100%;
+    height: calc(100vh - 48px);
+}
+
+.landing-body>.bg-img {
+    min-width: 100%;
+    max-width: 100%;
+    z-index: -1;
+}
+
+.control-bars {
+    width: 100%;
+    height: 100px;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+
+.control-bars>.btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-width: 0px !important;
+    background-color: transparent !important;
+    margin: auto;
+    min-width: 150px;
+}
+
+.control-bars>.btn:active {
+    background-color: #3e3c3c !important;
+}
+
+.control-bars>.btn>img {
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #eada23;
+}
+
+.control-bars>.btn>.img {
+    padding: 3px;
+    border-radius: 8px;
+    background-color: #eada23;
+}
+
+.control-bars>.btn img {
+    width: 46px;
+    height: 46px;
+}
+
+.control-bars>.btn>.text {
+    font-size: 14px;
+    line-height: 15px;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 2px;
+    max-width: 100px;
+    white-space: normal;
+    text-align: center;
+}

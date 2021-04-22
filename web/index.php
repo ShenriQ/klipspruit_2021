@@ -1,348 +1,315 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+/**
+ * CodeIgniter
+ *
+ * An open source application development framework for PHP
+ *
+ * This content is released under the MIT License (MIT)
+ *
+ * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * @package	CodeIgniter
+ * @author	EllisLab Dev Team
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+ * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	https://codeigniter.com
+ * @since	Version 1.0.0
+ * @filesource
+ */
 
-<head>
+/*
+ *---------------------------------------------------------------
+ * APPLICATION ENVIRONMENT
+ *---------------------------------------------------------------
+ *
+ * You can load different configurations depending on your
+ * current environment. Setting the environment also influences
+ * things like logging and error reporting.
+ *
+ * This can be set to anything, but default usage is:
+ *
+ *     development
+ *     testing
+ *     production
+ *
+ * NOTE: If you change these, also change the error_reporting() code below
+ */
+	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="A Very Powerful Project Management System For Freelancer Office  ">
-    <meta name="author" content="786net">
+/*
+ *---------------------------------------------------------------
+ * ERROR REPORTING
+ *---------------------------------------------------------------
+ *
+ * Different environments will require different levels of error reporting.
+ * By default development will show errors but testing and live will hide them.
+ */
+switch (ENVIRONMENT)
+{
+	case 'development':
+		error_reporting(E_ALL);
+		ini_set('display_errors', 1);
+	break;
 
-    <title>ProMS - SAAS</title>
+	case 'testing':
+	case 'production':
+		ini_set('display_errors', 0);
+		if (version_compare(PHP_VERSION, '5.3', '>='))
+		{
+			error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
+		}
+		else
+		{
+			error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE);
+		}
+	break;
 
-    <link rel='shortcut icon' type="image/png" href="./favicon.ico"/>
-    <!-- Font Awesome Icons -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	default:
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'The application environment is not set correctly.';
+		exit(1); // EXIT_ERROR
+}
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+/*
+ *---------------------------------------------------------------
+ * SYSTEM DIRECTORY NAME
+ *---------------------------------------------------------------
+ *
+ * This variable must contain the name of your "system" directory.
+ * Set the path if it is not in the same directory as this file.
+ */
+	$system_path = 'system';
 
-    <!-- Plugin CSS -->
-    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+/*
+ *---------------------------------------------------------------
+ * APPLICATION DIRECTORY NAME
+ *---------------------------------------------------------------
+ *
+ * If you want this front controller to use a different "application"
+ * directory than the default one you can set its name here. The directory
+ * can also be renamed or relocated anywhere on your server. If you do,
+ * use an absolute (full) server path.
+ * For more info please see the user guide:
+ *
+ * https://codeigniter.com/user_guide/general/managing_apps.html
+ *
+ * NO TRAILING SLASH!
+ */
+	$application_folder = 'application';
 
-    <!-- Theme CSS - Includes Bootstrap -->
-    <link href="css/creative.min.css" rel="stylesheet">
+/*
+ *---------------------------------------------------------------
+ * VIEW DIRECTORY NAME
+ *---------------------------------------------------------------
+ *
+ * If you want to move the view directory out of the application
+ * directory, set the path to it here. The directory can be renamed
+ * and relocated anywhere on your server. If blank, it will default
+ * to the standard location inside your application directory.
+ * If you do move this, use an absolute (full) server path.
+ *
+ * NO TRAILING SLASH!
+ */
+	$view_folder = '';
 
-</head>
 
-<body id="page-top">
+/*
+ * --------------------------------------------------------------------
+ * DEFAULT CONTROLLER
+ * --------------------------------------------------------------------
+ *
+ * Normally you will set your default controller in the routes.php file.
+ * You can, however, force a custom routing by hard-coding a
+ * specific controller class/function here. For most applications, you
+ * WILL NOT set your routing here, but it's an option for those
+ * special instances where you might want to override the standard
+ * routing in a specific front controller that shares a common CI installation.
+ *
+ * IMPORTANT: If you set the routing here, NO OTHER controller will be
+ * callable. In essence, this preference limits your application to ONE
+ * specific controller. Leave the function name blank if you need
+ * to call functions dynamically via the URI.
+ *
+ * Un-comment the $routing array below to use this feature
+ */
+	// The directory name, relative to the "controllers" directory.  Leave blank
+	// if your controller is not in a sub-directory within the "controllers" one
+	// $routing['directory'] = '';
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
-        <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">ProMS SAAS</a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#features">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#pricing">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pms/access/register">Get Started</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pms/access/login">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+	// The controller class file name.  Example:  mycontroller
+	// $routing['controller'] = '';
 
-    <!-- Masthead -->
-    <header class="masthead">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center justify-content-center text-center">
-                <div class="col-lg-10 align-self-end">
-                    <h1 class="text-uppercase text-white font-weight-bold">Premium Project Management System</h1>
-                    <hr class="divider my-4">
-                </div>
-                <div class="col-lg-8 align-self-baseline">
-                    <p class="text-white-75 font-weight-light mb-5">A Very Powerful Project Management System For Freelancer Office.
-                        <br> Manage Projects, Leads, Tasks, Invoices, Estimates, many more.</p>
-                    <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>
-                </div>
-            </div>
-        </div>
-    </header>
+	// The controller function you wish to be called.
+	// $routing['function']	= '';
 
-    <!-- About Section -->
-    <section class="page-section bg-primary" id="about">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <h2 class="text-white mt-0">We've got what you need</h2>
-                    <hr class="divider light my-4">
-                    <p class="text-white-50 mb-4">ProMS is the project management software that gives you complete control over your work. Manage your projects, clients and team members. You can collaborate with your team and monitor your work using powerful tools.</p>
-                    <a class="btn btn-light btn-xl" href="pms/access/register" target="_blank">Get Started!</a>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Features Section -->
-    <section class="page-section" id="features">
-        <div class="container">
-            <h2 class="text-center mt-0">ProMS is your workspace</h2>
-            <hr class="divider my-4">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <i class="fas fa-4x fa-project-diagram text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Projects</h3>
-                        <p class="text-muted mb-0">Create unlimited private
-                            <br>(In-house) or client projects</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <i class="fas fa-4x fa-users text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">People</h3>
-                        <p class="text-muted mb-0">Create and manage unlimited users in the project</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <i class="fas fa-4x fa-tasks text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Tasks Management</h3>
-                        <p class="text-muted mb-0">Stay on top of your work while juggling between multiple projects</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <i class="fas fa-4x fa-comments text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Discussions</h3>
-                        <p class="text-muted mb-0">Create a stand-alone topic and post comment to start discussions.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <i class="fas fa-4x fa-file text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Files</h3>
-                        <p class="text-muted mb-0">Upload stand-alone files or attach to commit in the project</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <i class="fas fa-4x fa-bell text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Notifications</h3>
-                        <p class="text-muted mb-0">Get notified when a task is assigned, project changes, ticket assigned, new message posted etc</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <i class="fas fa-4x fa-paper-plane text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Support Ticket</h3>
-                        <p class="text-muted mb-0">Full functioning support ticket system</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <i class="fas fa-4x fa-file-invoice-dollar text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Estimates to Invoices</h3>
-                        <p class="text-muted mb-0">Create and send professional looking estimates and once accepted by your client! You can convert them into invoices just click</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <i class="fas fa-4x fa-th-list text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Kanban Board</h3>
-                        <p class="text-muted mb-0">A Kanban board is added on the project tasks panel that is the most efficient tool for improving your team productivity</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <i class="fas fa-4x fa-chart-bar text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Gantt Charts</h3>
-                        <p class="text-muted mb-0">Professional Gantt Chart included for each project to show the breakdown of tasks</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <i class="fas fa-4x fa-user-clock text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Timesheet and Resources</h3>
-                        <p class="text-muted mb-0">Timesheet reporting help you to see which resources will be free and when and how many hours they are spending in each project</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <i class="fas fa-4x fa-calendar-alt text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Events</h3>
-                        <p class="text-muted mb-0">Create and schedule unlimited events. Share the event which specific team members and clients</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <i class="fas fa-4x fa-chart-line text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Reports</h3>
-                        <p class="text-muted mb-0">The owner of workspace can access the financial & time tracking reports. Financial report represent the income, expense and profit of organization</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <i class="fas fa-4x fa-money-check-alt text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Transactions</h3>
-                        <p class="text-muted mb-0">The owner of workspace can access the transactions section. Each transaction represents the debit or credit</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <i class="fas fa-4x fa-clock text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Project Activity</h3>
-                        <p class="text-muted mb-0">Activity logs help you keep track of project updates. An activity created whenever someone do something on the project (update a task, upload a file, post comment, manage project user etc.)</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <i class="fas fa-4x fa-bullhorn text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Announcements</h3>
-                        <p class="text-muted mb-0">The owner of workspace can create announcements for team members, clients and all users</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <i class="fas fa-4x fa-building text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Companies</h3>
-                        <p class="text-muted mb-0">Create unlimited companies of your customers and add contracts</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <i class="fas fa-4x fa-trophy text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Leads</h3>
-                        <p class="text-muted mb-0">Create custom statuses and sources for your leads and organize them accordingly</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <i class="fas fa-4x fa-archive text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Archive</h3>
-                        <p class="text-muted mb-0">The owner of workspace can move the users and companies to archive section. Archived items will be disabled in the system</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="mt-5">
-                        <i class="fas fa-4x fa-trash text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Trash</h3>
-                        <p class="text-muted mb-0">The trash feature is very powerful and unique. It give all users to freedom to move project items to trash section. The owner can remove an item from system permanently.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+/*
+ * -------------------------------------------------------------------
+ *  CUSTOM CONFIG VALUES
+ * -------------------------------------------------------------------
+ *
+ * The $assign_to_config array below will be passed dynamically to the
+ * config class when initialized. This allows you to set custom config
+ * items or override any default config values found in the config.php file.
+ * This can be handy as it permits you to share one application between
+ * multiple front controller files, with each file containing different
+ * config values.
+ *
+ * Un-comment the $assign_to_config array below to use this feature
+ */
+	// $assign_to_config['name_of_config_item'] = 'value of config item';
 
-    <section class="page-section bg-dark" id="pricing">
 
-        <div class="container">
-            <h2 class="text-white text-center mt-0">Pricing</h2>
-            <hr class="divider my-4">
-            <div class="card-deck mb-3 text-center">
-                <div class="card mb-4 box-shadow">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-normal">Free</h4>
-                    </div>
-                    <div class="card-body">
-                        <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h1>
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li>10 users included</li>
-                            <li>2 GB of storage</li>
-                            <li>Email support</li>
-                            <li>Help center access</li>
-                        </ul>
-                        <a href="pms/access/register?subscribe=1" class="btn btn-primary btn-lg btn-block">Sign up</a>
-                    </div>
-                </div>
-                <div class="card mb-4 box-shadow">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-normal">Pro</h4>
-                    </div>
-                    <div class="card-body">
-                        <h1 class="card-title pricing-card-title">$15 <small class="text-muted">/ mo</small></h1>
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li>20 users included</li>
-                            <li>10 GB of storage</li>
-                            <li>Priority email support</li>
-                            <li>Help center access</li>
-                        </ul>
-                        <a href="pms/access/register?subscribe=2" class="btn btn-primary btn-lg btn-block">Sign up</a>
-                    </div>
-                </div>
-                <div class="card mb-4 box-shadow">
-                    <div class="card-header">
-                        <h4 class="my-0 font-weight-normal">Enterprise</h4>
-                    </div>
-                    <div class="card-body">
-                        <h1 class="card-title pricing-card-title">$29 <small class="text-muted">/ mo</small></h1>
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li>30 users included</li>
-                            <li>15 GB of storage</li>
-                            <li>Phone and email support</li>
-                            <li>Help center access</li>
-                        </ul>
-                        <a href="pms/access/register?subscribe=3" class="btn btn-primary btn-lg btn-block">Sign up</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section class="page-section" id="contact">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <h2 class="mt-0">Let's Get In Touch!</h2>
-                    <hr class="divider my-4">
-                    <p class="text-muted mb-5">Ready to start your next project with us? Give us a call or send us an email and we will get back to you as soon as possible!</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 mr-auto text-center">
-                    <i class="fas fa-envelope fa-3x mb-3 text-muted"></i>
-                    <!-- Make sure to change the email address in anchor text AND the link below! -->
-                    <a class="d-block" href="mailto:example@domain.com">example@domain.com</a>
-                </div>
-            </div>
-        </div>
-    </section>
+// --------------------------------------------------------------------
+// END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
+// --------------------------------------------------------------------
 
-    <!-- Footer -->
-    <footer class="bg-light py-5">
-        <div class="container">
-            <div class="small text-center text-muted">Copyright &copy; 2020 - ProMS SAAS</div>
-        </div>
-    </footer>
+/*
+ * ---------------------------------------------------------------
+ *  Resolve the system path for increased reliability
+ * ---------------------------------------------------------------
+ */
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	// Set the current directory correctly for CLI requests
+	if (defined('STDIN'))
+	{
+		chdir(dirname(__FILE__));
+	}
 
-    <!-- Plugin JavaScript -->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+	if (($_temp = realpath($system_path)) !== FALSE)
+	{
+		$system_path = $_temp.DIRECTORY_SEPARATOR;
+	}
+	else
+	{
+		// Ensure there's a trailing slash
+		$system_path = strtr(
+			rtrim($system_path, '/\\'),
+			'/\\',
+			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+		).DIRECTORY_SEPARATOR;
+	}
 
-    <!-- Custom scripts for this template -->
-    <script src="js/creative.min.js"></script>
+	// Is the system path correct?
+	if ( ! is_dir($system_path))
+	{
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'Your system folder path does not appear to be set correctly. Please open the following file and correct this: '.pathinfo(__FILE__, PATHINFO_BASENAME);
+		exit(3); // EXIT_CONFIG
+	}
 
-</body>
+/*
+ * -------------------------------------------------------------------
+ *  Now that we know the path, set the main path constants
+ * -------------------------------------------------------------------
+ */
+	// The name of THIS file
+	define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
 
-</html>
+	// Path to the system directory
+	define('BASEPATH', $system_path);
+
+	// Path to the front controller (this file) directory
+	define('FCPATH', dirname(__FILE__).DIRECTORY_SEPARATOR);
+
+	// Name of the "system" directory
+	define('SYSDIR', basename(BASEPATH));
+
+	// The path to the "application" directory
+	if (is_dir($application_folder))
+	{
+		if (($_temp = realpath($application_folder)) !== FALSE)
+		{
+			$application_folder = $_temp;
+		}
+		else
+		{
+			$application_folder = strtr(
+				rtrim($application_folder, '/\\'),
+				'/\\',
+				DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+			);
+		}
+	}
+	elseif (is_dir(BASEPATH.$application_folder.DIRECTORY_SEPARATOR))
+	{
+		$application_folder = BASEPATH.strtr(
+			trim($application_folder, '/\\'),
+			'/\\',
+			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+		);
+	}
+	else
+	{
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'Your application folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
+		exit(3); // EXIT_CONFIG
+	}
+
+	define('APPPATH', $application_folder.DIRECTORY_SEPARATOR);
+
+	// The path to the "views" directory
+	if ( ! isset($view_folder[0]) && is_dir(APPPATH.'views'.DIRECTORY_SEPARATOR))
+	{
+		$view_folder = APPPATH.'views';
+	}
+	elseif (is_dir($view_folder))
+	{
+		if (($_temp = realpath($view_folder)) !== FALSE)
+		{
+			$view_folder = $_temp;
+		}
+		else
+		{
+			$view_folder = strtr(
+				rtrim($view_folder, '/\\'),
+				'/\\',
+				DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+			);
+		}
+	}
+	elseif (is_dir(APPPATH.$view_folder.DIRECTORY_SEPARATOR))
+	{
+		$view_folder = APPPATH.strtr(
+			trim($view_folder, '/\\'),
+			'/\\',
+			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+		);
+	}
+	else
+	{
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'Your view folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
+		exit(3); // EXIT_CONFIG
+	}
+
+	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
+
+/*
+ * --------------------------------------------------------------------
+ * LOAD THE BOOTSTRAP FILE
+ * --------------------------------------------------------------------
+ *
+ * And away we go...
+ */
+require_once BASEPATH.'core/CodeIgniter.php';
