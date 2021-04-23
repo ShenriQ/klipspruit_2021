@@ -1,17 +1,17 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-tpl_assign("title_for_layout", "Packages"); ?>
+tpl_assign("title_for_layout", "Widgets"); ?>
 
 <div class="panel panel-default">
-<p><a href="javascript:void();" data-url="<?php echo get_page_base_url('projects/add'); ?>" class="btn btn-success custom-m-3" data-toggle="commonmodal"> + New Widget</a></p>
+<p><a href="javascript:void();" data-url="<?php echo get_page_base_url('admin/widgets/add'); ?>" class="btn btn-success custom-m-3" data-toggle="commonmodal"> + New Widget</a></p>
 <div class="panel-heading">
 	<span class="custom-font-size18">Widgets</span>
 </div>
 
 <div class="panel-body">
 	
-<?php if(isset($packages) && is_array($packages) && count($packages)) : ?>
+<?php if(isset($widgets) && is_array($widgets) && count($widgets)) : ?>
 
-	<table class="table table-hover table-bordered projects">
+	<table class="table table-hover table-bordered widgets_table">
 	
 	<thead>
 		<th width="20%">Photo</th>
@@ -22,20 +22,23 @@ tpl_assign("title_for_layout", "Packages"); ?>
 	
 	<tbody>
 
-	<?php foreach($packages as $package) : ?>			
+	<?php foreach($widgets as $widget) : ?>			
 	<tr>
-	<td><?php echo $package->getName(); ?></td>
-	<td><?php echo $package->getPricePerMonth(); ?></td>
-	<td><?php echo $package->getMaxStorage(); ?></td>
-	<td><a href="javascript:void();" data-url="<?php echo get_page_base_url($package->getEditURL()); ?>" data-toggle="commonmodal" class="btn btn-sm btn-success">Edit</a></td>
+	<td><img src="<?php echo $widget->getPhotoUrl(); ?>" /> </td>
+	<td><?php echo $widget->getTitle(); ?></td>
+	<td><?php echo $widget->getDescription(); ?></td>
+	<td>
+		<a href="javascript:void();" data-url="<?php echo get_page_base_url($widget->getEditURL()); ?>" data-toggle="commonmodal" class="btn btn-sm btn-success">
+			<i class="fa fa-edit fa-fw"></i>
+		</a>
+		<a href="javascript:void();" data-url="<?php echo get_page_base_url($widget->getDeleteUrl()); ?>" data-toggle="commonmodal" class="btn btn-sm btn-success">
+			<i class="fa fa-trash fa-fw"></i>
+		</a>
+	</td>
 	</tr>
-	
 	<?php endforeach; ?>
-	
 	</tbody>
-	
 	</table>
-	
 <?php else : ?> 
 <p>No record found.</p>
 <?php endif; ?> 

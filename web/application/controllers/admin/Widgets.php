@@ -10,74 +10,183 @@ class Widgets extends Admin_controller {
 	}
 	
 	public function index() {
-		
-		$packages = $this->IPackages->find();
-		tpl_assign('packages', $packages);
-		
+		$widgets = $this->IWidgets->find();
+		tpl_assign('widgets', $widgets);
 	}
 	
-	public function edit($id){
+	public function validate_photo() {
 
-		only_ajax_request_allowed();
-		$this->setLayout('modal');
+		$photo = input_file_request('photo');		
+		if(!empty($photo['name'])){
 
-		$package = $this->IPackages->findById($id);
-		if(is_null($package)) {
-			set_flash_error("The page you requested was not found.", true);
+			$valid_image_types = array('image/jpg', 'image/jpeg', 'image/pjpeg', 'image/gif', 'image/png');
+			if(in_array($photo['type'], $valid_image_types) && $image = getimagesize($photo['tmp_name'])) {
+				return TRUE;
+			}
+			
 		}
 
-		tpl_assign('package', $package);
+		$this->form_validation->set_message('validate_photo', 'The {field} is not valid image.');
+		return FALSE;
+	
+	}
 
-		$name = input_post_request('name', $package->getName());
-		tpl_assign("name", $name);
+	public function add(){
+		only_ajax_request_allowed();
+		$this->setLayout('modal');
+		$this->setTemplate('admin/widgets/add');
 
-		$price_per_month = input_post_request('price_per_month', $package->getPricePerMonth());
-		tpl_assign("price_per_month", $price_per_month);
+		$widget = new IWidget();
 
-		$max_storage = input_post_request('max_storage', $package->getMaxStorage());
-		tpl_assign("max_storage", $max_storage);
+		$title = input_post_request('title', $widget->getTitle());
+		tpl_assign("title", $title);
 
-		$max_users = input_post_request('max_users', $package->getMaxUsers());
-		tpl_assign("max_users", $max_users);
+		$description = input_post_request('description', $widget->getDescription());
+		tpl_assign("description", $description);
 
-		$max_projects = input_post_request('max_projects', $package->getMaxProjects());
-		tpl_assign("max_projects", $max_projects);
+		$photo = input_file_request('photo');
+		$remove_photo = input_post_request('remove_photo');
 
 		$is_submited = input_post_request('submited') ==  'submited';
 	
 		if ($is_submited) {
 	
-			$this->form_validation->set_rules('price_per_month', 'Price (Per Month)', 'required|numeric');
-			$this->form_validation->set_rules('max_storage', 'Storage (GB)', 'required|numeric');
-			$this->form_validation->set_rules('max_users', 'No.of Users', 'required|numeric');
-			$this->form_validation->set_rules('max_projects', 'No.of Projects', 'required|numeric');
+			$this->form_validation->set_rules('title', 'Title', 'required');
+			$this->form_validation->set_rules('description', 'Description', 'required');
 		
+			if(!empty($photo['name'])){
+				$this->form_validation->set_rules('photo', 'Photo', 'callback_validate_photo');
+			}
+			else {
+				$this->form_validation->set_rules('photo', 'Photo', 'required');
+			}
 			if ($this->form_validation->run() == FALSE) {
 				$this->renderText(output_ajax_request(false, validation_errors()));
 			} else {
-
 				try{
-					if($id > 1) { // Disabled price for free
-						$package->setPricePerMonth($price_per_month);
+					$widget->setTitle($title);
+					$widget->setDescription($description);
+
+					if($remove_photo == "on"){
+						$widget->deletePhoto();
 					}
-					$package->setMaxStorage($max_storage);
-					$package->setMaxUsers($max_users);
-					$package->setMaxProjects($max_projects);
-					
-					$package->save();
-					
-					set_flash_success("Package has been saved successfully.");
-					
+					else{	
+						if(!empty($photo['name'])){
+							$old_photo = $widget->getPhotoUrl();
+							if(!$widget->savePhotoFile($photo['tmp_name'])) {
+								throw new Exception();
+							}
+							else{
+								if(is_file($old_photo)) {
+									@unlink($old_photo);
+								}
+							}
+						}
+					}
+					$widget->save();
+					set_flash_success("Widget has been saved successfully.");
 				}catch(Exception $e){
 					set_flash_error("An error was encountered.");
 				}
-
 				$this->renderText(output_ajax_request(true));
-	
 			}
-		
 		}
-		
 	}
 
+	public function edit($id){
+
+		only_ajax_request_allowed();
+		$this->setLayout('modal');
+		$this->setTemplate('admin/widgets/edit');
+
+		$widget = $this->IWidgets->findById($id);
+		if(is_null($widget)) {
+			set_flash_error("The page you requested was not found.", true);
+		}
+
+		tpl_assign('widget', $widget);
+
+		$title = input_post_request('title', $widget->getTitle());
+		tpl_assign("title", $title);
+
+		$description = input_post_request('description', $widget->getDescription());
+		tpl_assign("description", $description);
+
+		$photo = input_file_request('photo');
+		$remove_photo = input_post_request('remove_photo');
+
+		$is_submited = input_post_request('submited') ==  'submited';
+	
+		if ($is_submited) {
+	
+			$this->form_validation->set_rules('title', 'Title', 'required');
+			$this->form_validation->set_rules('description', 'Description', 'required');
+		
+			if(!empty($photo['name'])){
+				$this->form_validation->set_rules('photo', 'Photo', 'callback_validate_photo');
+			}
+			else {
+				// $this->form_validation->set_rules('photo', 'Photo', 'required');
+			}
+			if ($this->form_validation->run() == FALSE) {
+				$this->renderText(output_ajax_request(false, validation_errors()));
+			} else {
+				try{
+					$widget->setTitle($title);
+					$widget->setDescription($description);
+
+					if($remove_photo == "on"){
+						$widget->deletePhoto();
+					}
+					else{	
+						if(!empty($photo['name'])){
+							$old_photo = $widget->getPhotoUrl();
+							if(!$widget->savePhotoFile($photo['tmp_name'])) {
+								throw new Exception();
+							}
+							else{
+								if(is_file($old_photo)) {
+									@unlink($old_photo);
+								}
+							}
+						}
+					}
+					$widget->save();
+					set_flash_success("Widget has been saved successfully.");
+				}catch(Exception $e){
+					set_flash_error("An error was encountered.");
+				}
+				$this->renderText(output_ajax_request(true));
+			}
+		}
+	}
+
+	
+	public function delete($id){
+
+		only_ajax_request_allowed();
+		$this->setLayout('modal');
+		$this->setTemplate('admin/widgets/delete');
+
+		$widget = $this->IWidgets->findById($id);
+		if(is_null($widget)) {
+			set_flash_error("The page you requested was not found.", true);
+		}
+
+		tpl_assign('widget', $widget);
+
+		$is_submited = input_post_request('submited') ==  'submited';
+	
+		if ($is_submited) {
+			try{
+				$widget->deletePhoto();
+				$widget->delete();
+				set_flash_success("Widget has been removed successfully.");
+			}
+			catch(Exception $e){
+				set_flash_error("An error was encountered.");
+			}
+			$this->renderText(output_ajax_request(true));
+		}
+	}
 }

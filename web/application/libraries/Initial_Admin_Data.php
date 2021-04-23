@@ -13,6 +13,7 @@ final class Initial_Admin_Data {
 		$this->CI_instance()->load->model('IUsers');
 		$this->CI_instance()->load->model('IOrders');
 		$this->CI_instance()->load->model('IPackages');
+		$this->CI_instance()->load->model('IWidgets');
 		$this->CI_instance()->load->model('TargetSources');
 		$this->CI_instance()->load->model('IConfigurations');
 		

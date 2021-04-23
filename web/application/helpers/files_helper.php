@@ -149,6 +149,36 @@ function delete_avatar($delete_file) {
 	
 }
     
+// upload photos
+function upload_file($source, $extension = null) {
+
+	if(!is_readable($source)) return false;
+	
+	$attach_extension = trim($extension) == '' ? '' : '.' . trim($extension);
+	do {
+		$destination = get_upload_path(sha1(uniqid(rand(), true)) . $attach_extension);
+	} while(is_file($destination));
+	
+	return copy($source, $destination) ? basename($destination) : false;
+
+}
+
+function get_upload_path($filename) {
+	return FCPATH.'/public/uploads/'.$filename;
+}
+
+function delete_file($delete_file) {
+	
+	$destination = get_upload_path($delete_file);
+	
+	if(is_file($destination)) {
+		return @unlink($destination);
+	}
+	
+	return false;
+}
+// 
+
 function download_contents($content, $type, $name, $size, $force_download = false){
 
 	if(connection_status() != 0) return false;

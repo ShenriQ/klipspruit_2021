@@ -1,50 +1,50 @@
 .attached_files-wrap,
 .fixed-wrap {
-	max-height: 400px;
-	overflow: auto
+    max-height: 400px;
+    overflow: auto
 }
 
 .sublinks li a {
-	margin-left: 20px;
-	background-color: transparent!important
+    margin-left: 20px;
+    background-color: transparent!important
 }
 
 .checkbox input[type=checkbox] {
-	margin-left: -23px!important;
-	margin-top: 2px!important;
-	opacity: 1!important
+    margin-left: -23px!important;
+    margin-top: 2px!important;
+    opacity: 1!important
 }
 
 .color-selector input,
 .notify {
-	opacity: 0
+    opacity: 0
 }
 
 .notify.error {
-	background: #ed5564
+    background: #ed5564
 }
 
 .notify.success {
-	background: #43ac6e
+    background: #43ac6e
 }
 
 .notify {
-	background: #000;
-	position: fixed;
-	right: -300px;
-	bottom: 20px;
-	padding: 10px 25px;
-	margin: 0 15px;
-	color: #fff;
-	font-weight: 600;
-	z-index: 999;
-	border-radius: 2px
+    background: #000;
+    position: fixed;
+    right: -300px;
+    bottom: 20px;
+    padding: 10px 25px;
+    margin: 0 15px;
+    color: #fff;
+    font-weight: 600;
+    z-index: 999;
+    border-radius: 2px
 }
 
 .flow-list,
 .flow-view,
 .flow_task {
-	position: relative
+    position: relative
 }
 
 .bgC1,
@@ -61,534 +61,550 @@
 .bgC7,
 .bgC8,
 .bgC9 {
-	color: #fff!important
+    color: #fff!important
 }
 
 .avatar {
-	border-radius: 50%;
-	-moz-border-radius: 50%;
-	-webkit-border-radius: 50%
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%
 }
 
 .morecontent span {
-	display: none
+    display: none
 }
 
 .morelink {
-	display: block
+    display: block
 }
 
 .docbox {
-	background: #fff;
-	box-shadow: 0 0 6px #b5b5b5;
-	margin-top: 20px;
-	min-height: 500px;
-	border: 1px solid #b5b5b5
+    background: #fff;
+    box-shadow: 0 0 6px #b5b5b5;
+    margin-top: 20px;
+    min-height: 500px;
+    border: 1px solid #b5b5b5
 }
 
 .color-selector {
-	width: 15px;
-	height: 15px;
-	display: inline-block;
-	margin-right: 10px
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    margin-right: 10px
 }
 
 .color-selector input:hover {
-	cursor: pointer
+    cursor: pointer
 }
 
 .color-selector.selected {
-	box-shadow: 0 0 0 2px #444
+    box-shadow: 0 0 0 2px #444
 }
 
 .bgC1 {
-	background: #d870ad!important;
-	border: 1px solid #d870ad!important
+    background: #d870ad!important;
+    border: 1px solid #d870ad!important
 }
 
 .bgC2 {
-	background: #3bbeb0!important;
-	border: 1px solid #3bbeb0!important
+    background: #3bbeb0!important;
+    border: 1px solid #3bbeb0!important
 }
 
 .bgC3 {
-	background: #3bb85d!important;
-	border: 1px solid #3bb85d!important
+    background: #3bb85d!important;
+    border: 1px solid #3bb85d!important
 }
 
 .bgC4 {
-	background: #b1c252!important;
-	border: 1px solid #b1c252!important
+    background: #b1c252!important;
+    border: 1px solid #b1c252!important
 }
 
 .bgC5 {
-	background: #f5ba42!important;
-	border: 1px solid #f5ba42!important
+    background: #f5ba42!important;
+    border: 1px solid #f5ba42!important
 }
 
 .bgC6 {
-	background: #f59b43!important;
-	border: 1px solid #f59b43!important
+    background: #f59b43!important;
+    border: 1px solid #f59b43!important
 }
 
 .bgC7 {
-	background: #e3643e!important;
-	border: 1px solid #e3643e!important
+    background: #e3643e!important;
+    border: 1px solid #e3643e!important
 }
 
 .bgC8 {
-	background: #d9434e!important;
-	border: 1px solid #d9434e!important
+    background: #d9434e!important;
+    border: 1px solid #d9434e!important
 }
 
 .bgC9 {
-	background: #a5adb8!important;
-	border: 1px solid #a5adb8!important
+    background: #a5adb8!important;
+    border: 1px solid #a5adb8!important
 }
 
 .bgC10 {
-	background: #7277d5!important;
-	border: 1px solid #7277d5!important
+    background: #7277d5!important;
+    border: 1px solid #7277d5!important
 }
 
 .bgC11 {
-	background: #31353c!important;
-	border: 1px solid #31353c!important
+    background: #31353c!important;
+    border: 1px solid #31353c!important
 }
 
 .bgC12 {
-	background: #3bb1d9!important;
-	border: 1px solid #3bb1d9!important
+    background: #3bb1d9!important;
+    border: 1px solid #3bb1d9!important
 }
 
 .bgC13 {
-	background: #4b8cdc!important;
-	border: 1px solid #4b8cdc!important
+    background: #4b8cdc!important;
+    border: 1px solid #4b8cdc!important
 }
 
 .bgC14 {
-	background: #b276d8!important;
-	border: 1px solid #b276d8!important
+    background: #b276d8!important;
+    border: 1px solid #b276d8!important
 }
 
 .CustumEventText {
-	font-size: 11px;
-	padding: 2px
+    font-size: 11px;
+    padding: 2px
 }
 
 .todayLog {
-	background: #fffae9
+    background: #fffae9
 }
 
 .yesterdayLog {
-	background: #fcfaf3
+    background: #fcfaf3
 }
 
 .otherdayLog {
-	background: #fff
+    background: #fff
 }
 
 .logDatetime {
-	font-size: 12px;
-	color: #999
+    font-size: 12px;
+    color: #999
 }
 
 .message-wrap {
-	box-shadow: 0 0 4px #999;
-	-webkit-border-radius: 2px;
-	margin-bottom: 10px
+    box-shadow: 0 0 4px #999;
+    -webkit-border-radius: 2px;
+    margin-bottom: 10px
 }
 
 .send-wrap {
-	border-top: 1px solid #eee;
-	border-bottom: 1px solid #eee;
-	padding: 10px;
-	background: #f8f8f8
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 10px;
+    background: #f8f8f8
 }
 
 .attached_files-wrap {
-	padding: 0
+    padding: 0
 }
 
 .sl-left-circle {
-	margin-left: -6px!important;
-	margin-top: -2px!important
+    margin-left: -6px!important;
+    margin-top: -2px!important
 }
 
 .fn-gantt .bar.gantt-timeline .fn-label {
-	overflow: visible;
-	font-size: 21px;
-	color: #8067b7
+    overflow: visible;
+    font-size: 21px;
+    color: #8067b7
 }
 
 .fn-gantt .bar.gantt-timeline {
-	height: 17px;
-	background: 0 0;
-	margin-top: 1px;
-	border-top: 2px solid #f93;
-	border-radius: 0;
-	overflow: visible
+    height: 17px;
+    background: 0 0;
+    margin-top: 1px;
+    border-top: 2px solid #f93;
+    border-radius: 0;
+    overflow: visible
 }
 
 .fn-gantt .bar.gantt-timeline .fn-label:after,
 .fn-gantt .bar.gantt-timeline .fn-label:before {
-	content: "\f175";
-	color: #f93;
-	margin-top: -1px;
-	display: inline-block;
-	text-rendering: auto;
-	-moz-osx-font-smoothing: grayscale
+    content: "\f175";
+    color: #f93;
+    margin-top: -1px;
+    display: inline-block;
+    text-rendering: auto;
+    -moz-osx-font-smoothing: grayscale
 }
 
 .fn-gantt .bar.gantt-timeline .fn-label:before {
-	float: left;
-	margin-left: -3px;
-	font: normal normal normal 14px/1 FontAwesome;
-	font-size: inherit;
-	-webkit-font-smoothing: antialiased
+    float: left;
+    margin-left: -3px;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    -webkit-font-smoothing: antialiased
 }
 
 .fn-gantt .bar.gantt-timeline .fn-label:after {
-	float: right;
-	margin-right: -4px;
-	font: normal normal normal 14px/1 FontAwesome;
-	font-size: inherit;
-	-webkit-font-smoothing: antialiased
+    float: right;
+    margin-right: -4px;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    -webkit-font-smoothing: antialiased
 }
 
 .sub_gantt_text {
-	font-weight: 300
+    font-weight: 300
 }
 
 .badgetopbar {
-	min-width: 10px;
-	padding: 1px 5px;
-	font-size: 10px;
-	font-weight: 500;
-	line-height: 1;
-	color: #fff;
-	text-align: center;
-	white-space: nowrap;
-	vertical-align: middle;
-	background-color: #ff7979;
-	border-radius: 7px;
-	margin-left: -14px
+    min-width: 10px;
+    padding: 1px 5px;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #ff7979;
+    border-radius: 7px;
+    margin-left: -14px
 }
 
 .customicon {
-	font-size: 15px!important
+    font-size: 15px!important
 }
 
 .unread-notification {
-	background: #fffae9
+    background: #fffae9
 }
 
 .focus_onmove {
-	-webkit-transform: rotate(-5deg);
-	-moz-transform: rotate(-5deg);
-	background-color: #eee!important
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    background-color: #eee!important
 }
 
 .focus_placeholder {
-	height: 4em;
-	border: 2px dashed #ddd;
-	margin-bottom: 10px
+    height: 4em;
+    border: 2px dashed #ddd;
+    margin-bottom: 10px
 }
 
 .empty_column {
-	text-align: center;
-	color: #ccc;
-	text-transform: uppercase;
-	line-height: 40px;
-	font-size: 13px;
-	padding: 5px
+    text-align: center;
+    color: #ccc;
+    text-transform: uppercase;
+    line-height: 40px;
+    font-size: 13px;
+    padding: 5px
 }
 
 .flow-view {
-	width: 100%;
-	overflow-y: hidden;
-	overflow-x: scroll;
-	min-height: 410px
+    width: 100%;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    min-height: 410px
 }
 
 .flow-content {
-	border: 1px solid #eee;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	padding-left: 10px
+    border: 1px solid #eee;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding-left: 10px
 }
 
 .flow-view .flow-lists {
-	display: block;
-	position: relative;
-	clear: both;
-	padding-bottom: 40px
+    display: block;
+    position: relative;
+    clear: both;
+    padding-bottom: 40px
 }
 
 .flow-list {
-	width: 275px;
-	margin-right: 10px;
-	height: 100%;
-	float: left;
-	border-radius: 3px;
-	padding: 5px
+    width: 275px;
+    margin-right: 10px;
+    height: 100%;
+    float: left;
+    border-radius: 3px;
+    padding: 5px
 }
 
 .flow-list .tasklist {
-	background-color: #eee;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px
+    background-color: #eee;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px
 }
 
 .tasklist {
-	width: 100%;
-	margin: 10px 0
+    width: 100%;
+    margin: 10px 0
 }
 
 .flow-list .list-tasks {
-	overflow-y: auto;
-	overflow-x: hidden
+    overflow-y: auto;
+    overflow-x: hidden
 }
 
 .flow_task_scrollbar {
-	-webkit-overflow-scrolling: touch;
-	padding-left: 4px;
-	padding-right: 4px
+    -webkit-overflow-scrolling: touch;
+    padding-left: 4px;
+    padding-right: 4px
 }
 
 .list-tasks li {
-	line-height: 20px!important
+    line-height: 20px!important
 }
 
 .atask {
-	margin-bottom: 5px;
-	word-wrap: break-word
+    margin-bottom: 5px;
+    word-wrap: break-word
 }
 
 .flow_task {
-	margin-bottom: 4px!important;
-	padding: 7px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	background-color: #fff
+    margin-bottom: 4px!important;
+    padding: 7px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff
 }
 
 .table-responsive {
-	overflow-x: initial
+    overflow-x: initial
 }
 
 .img-circle-sm {
-	border-radius: 50%;
-	width: 32px;
-	height: 32px
+    border-radius: 50%;
+    width: 32px;
+    height: 32px
 }
 
 .img-circle-md {
-	border-radius: 50%;
-	width: 48px!important;
-	height: 48px!important
+    border-radius: 50%;
+    width: 48px!important;
+    height: 48px!important
 }
 
 .custom-normal-white-space {
-	white-space: normal!important
+    white-space: normal!important
 }
 
 .custom-color-red {
-	color: red
+    color: red
 }
 
 .custom-color-white {
-	color: white
+    color: white
 }
 
 .custom-color-green {
-	color: green
+    color: green
 }
 
 .custom-font-bold {
-	font-weight: 700
+    font-weight: 700
 }
 
 .custom-font-weight-bold {
-	font-weight:bold
+    font-weight: bold
 }
 
 .custom-font-normal {
-	font-weight: 400
+    font-weight: 400
 }
 
 .custom-cursor-pointer {
-	cursor: pointer
+    cursor: pointer
 }
 
 .custom-backgound-lightyellow-underline {
-	background-color: #ffffce;
-	text-decoration: underline
+    background-color: #ffffce;
+    text-decoration: underline
 }
 
 .custom-max-width-model {
-	max-width: 800px
+    max-width: 800px
 }
 
 .custom-display-none {
-	display: none
+    display: none
 }
 
 .custom-full-width {
-	width: 100%!important
+    width: 100%!important
 }
 
 .custom-fixed-width-select {
-	width: 200px;
-	margin: 3px
+    width: 200px;
+    margin: 3px
 }
 
 .custom-clear-both {
-	clear: both
+    clear: both
 }
 
 .custom-small-grey-color {
-	font-size: 12px;
-	color: #888;
-	padding-top: 3px;
+    font-size: 12px;
+    color: #888;
+    padding-top: 3px;
 }
 
 .custom-small-dark-grey-color {
-	font-size: 12px;
-	color: #333
+    font-size: 12px;
+    color: #333
 }
 
 .custom-p-2 {
-	padding: 2px
+    padding: 2px
 }
 
 .custom-p-5 {
-	padding: 5px
+    padding: 5px
 }
 
 .custom-pt-5 {
-	padding-top: 5px
+    padding-top: 5px
 }
 
 .custom-pb-15 {
-	padding-bottom: 15px
+    padding-bottom: 15px
 }
 
 .custom-p-10 {
-	padding: 10px
+    padding: 10px
 }
 
 .custom-p-15 {
-	padding: 15px
+    padding: 15px
 }
 
 .custom-m-3 {
-	margin: 3px
+    margin: 3px
 }
 
 .custom-m-0 {
-	margin: 0
+    margin: 0
 }
 
 .custom-m-5 {
-	margin: 5px
+    margin: 5px
 }
 
 .custom-mt-5 {
-	margin-top: 5px
+    margin-top: 5px
 }
 
 .custom-m-10 {
-	margin: 10px
+    margin: 10px
 }
 
 .custom-mt-10 {
-	margin-top: 10px
+    margin-top: 10px
 }
 
 .custom-mr-10 {
-	margin-right: 10px
+    margin-right: 10px
 }
 
 .custom-mb-10 {
-	margin-bottom: 10px
+    margin-bottom: 10px
 }
 
 .custom-ml-10 {
-	margin-left: 10px
+    margin-left: 10px
 }
 
 .custom-m-15 {
-	margin: 15px
+    margin: 15px
 }
 
 .custom-mt-15 {
-	margin-top: 15px
+    margin-top: 15px
 }
 
 .custom-m-20 {
-	margin: 20px
+    margin: 20px
 }
 
 .custom-mt-20 {
-	margin-top: 20px
+    margin-top: 20px
 }
 
 .custom-p-0 {
-	padding: 0;
+    padding: 0;
 }
 
 .custom-backgound-lightyellow {
-	background-color: #ffffce;
+    background-color: #ffffce;
 }
 
 .custom-font-size18 {
-	font-size:18px;
+    font-size: 18px;
 }
 
 .custom-smallselect-box {
-	width:200px; margin:3px;
+    width: 200px;
+    margin: 3px;
 }
 
 .custom-background-white {
-	background:white!important;
+    background: white!important;
 }
 
 .custom-background-light-yellow {
-	background-color:#FFFFCC;
+    background-color: #FFFFCC;
 }
 
 .custom-width40 {
-	width: 40px;
+    width: 40px;
 }
 
 .custom-currency-text {
-	font-weight:bold;padding-top:5px;color:green;
+    font-weight: bold;
+    padding-top: 5px;
+    color: green;
 }
 
+
 /* 2021 */
+
 .sidebar-logo {
-	display: flex !important;
-	justify-content: center;
-	align-items: center;
-	background-color: #222d32 !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    background-color: #222d32 !important;
 }
-.sidebar-logo > img {
-	margin-right: 6px;
+
+.sidebar-logo>img {
+    margin-right: 6px;
 }
-.sidebar-logo > p {
-	font-size: 16px;
-	color: #fff;
-	margin: 0px !important;
+
+.sidebar-logo>p {
+    font-size: 16px;
+    color: #fff;
+    margin: 0px !important;
 }
-.sidebar > hr {
-	margin: 0px !important;
+
+.sidebar>hr {
+    margin: 0px !important;
 }
+
 .main-header .navbar {
     background-color: #222d32 !important;
 }
+
 .main-header .logo {
-	background-color: #222d32 !important;
+    background-color: #222d32 !important;
+}
+
+.widgets_table td>img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
 }
