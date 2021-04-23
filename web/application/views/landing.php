@@ -13,8 +13,7 @@ echo (isset($title_for_layout) ? $title_for_layout : ''); ?></title>
 
     <link href="<?php echo base_url();?>public/assets/vendor/jquery.ganttView.css" rel="stylesheet">
 
-    <link href="<?php echo base_url();?>public/assets/bower_components/bootstrap/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+    <link href="<?php echo base_url();?>public/assets/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url();?>public/assets/bower_components/font-awesome/css/font-awesome.min.css"
         rel="stylesheet">
     <link href="<?php echo base_url();?>public/assets/bower_components/Ionicons/css/ionicons.min.css" rel="stylesheet">
@@ -77,7 +76,7 @@ echo (isset($title_for_layout) ? $title_for_layout : ''); ?></title>
         </header>
 
         <div class="landing-body">
-		<?php if((logged_user() instanceof User)) {?>
+            <?php if((logged_user() instanceof User)) {?>
             <div class="control-bars">
                 <a class="btn">
                     <div class="img">
@@ -134,11 +133,40 @@ echo (isset($title_for_layout) ? $title_for_layout : ''); ?></title>
                     <div class="text">Log Service Request</div>
                 </button>
             </div>
-			<?php } ?>
+            <?php } ?>
             <img src='<?php echo base_url();?>public/assets/images/Mine_bg.jpg' class="bg-img" />
+
+            <div class="container-fluid carousel-landing">
+                <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="9000">
+                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                        <?php 
+                        $cnt = 0;
+                        foreach($widgets as $widget) : ?>
+                        <div class="carousel-item col-xs-12 col-md-3 <?php if($cnt == 0) echo "active"; ?>">
+                            <div class="panel panel-default">
+                                <h4><?php echo $widget->getTitle(); ?></h4>
+                                <p><?php echo $widget->getDescription(); ?></p>
+                                <div class="panel-thumbnail">
+                                    <img class="img-fluid mx-auto d-block" src="<?php echo $widget->getPhotoUrl(); ?>" alt="slide 1">
+                                    <a href="#" class="thumb">
+                                        Read More
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <?php $cnt ++; endforeach; ?>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next text-faded" href="#carouselExample" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
         </div>
-
-
     </div>
 
     <?php $gl_success = isset($success) ? $success : $this->session->flashdata('success'); ?>
@@ -160,7 +188,7 @@ echo (isset($title_for_layout) ? $title_for_layout : ''); ?></title>
 
     <script src="<?php echo base_url();?>public/assets/vendor/jquery-ui/jquery-ui.min.js"></script>
 
-    <script src="<?php echo base_url();?>public/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url();?>public/assets/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
 
     <script src="<?php echo base_url();?>public/assets/js/jquery.slimscroll.js"></script>
 
@@ -214,6 +242,48 @@ echo (isset($title_for_layout) ? $title_for_layout : ''); ?></title>
             }
             return false;
         });
+    });
+
+
+    $('#carouselExample').on('slide.bs.carousel', function(e) {
+        var $e = $(e.relatedTarget);
+        var idx = $e.index();
+        var itemsPerSlide = 4;
+        var totalItems = $('.carousel-item').length;
+
+        if (idx >= totalItems - (itemsPerSlide - 1)) {
+            var it = itemsPerSlide - (totalItems - idx);
+            for (var i = 0; i < it; i++) {
+                // append slides to end
+                if (e.direction == "left") {
+                    $('.carousel-item').eq(i).appendTo('.carousel-inner');
+                } else {
+                    $('.carousel-item').eq(0).appendTo('.carousel-inner');
+                }
+            }
+        }
+    });
+
+
+    $('#carouselExample').carousel({
+        interval: 4000
+    });
+
+
+    $(document).ready(function() {
+        /* show lightbox when clicking a thumbnail */
+        $('a.thumb').click(function(event) {
+            event.preventDefault();
+            var content = $('.modal-body');
+            content.empty();
+            var title = $(this).attr("title");
+            $('.modal-title').html(title);
+            content.html($(this).html());
+            $(".modal-profile").modal({
+                show: true
+            });
+        });
+
     });
     </script>
 
