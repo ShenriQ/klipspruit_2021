@@ -137,7 +137,7 @@ echo (isset($title_for_layout) ? $title_for_layout : ''); ?></title>
             <img src='<?php echo base_url();?>public/assets/images/Mine_bg.jpg' class="bg-img" />
 
             <div class="container-fluid carousel-landing">
-                <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="9000">
+                <div id="carouselBody" class="carousel slide" data-ride="carousel" data-interval="9000">
                     <div class="carousel-inner row w-100 mx-auto" role="listbox">
                         <?php 
                         $cnt = 0;
@@ -156,11 +156,11 @@ echo (isset($title_for_layout) ? $title_for_layout : ''); ?></title>
                         </div>
                         <?php $cnt ++; endforeach; ?>
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                    <a class="carousel-control-prev" href="#carouselBody" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
                     </a>
-                    <a class="carousel-control-next text-faded" href="#carouselExample" role="button" data-slide="next">
+                    <a class="carousel-control-next text-faded" href="#carouselBody" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
@@ -245,7 +245,7 @@ echo (isset($title_for_layout) ? $title_for_layout : ''); ?></title>
     });
 
 
-    $('#carouselExample').on('slide.bs.carousel', function(e) {
+    $('#carouselBody').on('slide.bs.carousel', function(e) {
         var $e = $(e.relatedTarget);
         var idx = $e.index();
         var itemsPerSlide = 4;
@@ -265,7 +265,7 @@ echo (isset($title_for_layout) ? $title_for_layout : ''); ?></title>
     });
 
 
-    $('#carouselExample').carousel({
+    $('#carouselBody').carousel({
         interval: 4000
     });
 
